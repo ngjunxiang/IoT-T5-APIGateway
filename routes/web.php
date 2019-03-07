@@ -9,6 +9,10 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', 'MainController@index')->name('index');
+Route::prefix('liveimage')->group(function () {
+    Route::post('/store', 'ApiController@store')->name('store');
+    Route::get('/', 'ApiController@index')->name('index');
+});
