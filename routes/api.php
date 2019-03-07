@@ -11,9 +11,7 @@
 |
  */
 
-Route::middleware('api')->group(function () {
-    Route::prefix('liveimage')->group(function () {
-        Route::post('/store', 'ApiController@store')->name('store');
-        Route::get('/', 'ApiController@index')->name('index');
-    });
+Route::prefix('liveimage')->group(function () {
+    Route::post('/store', 'ApiController@store')->name('store');
+    Route::get('/', 'ApiController@index')->name('index');
 });
