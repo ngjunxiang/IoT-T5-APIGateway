@@ -14,6 +14,6 @@
 Route::middleware('api')->group(function () {
     Route::prefix('liveimage')->group(function () {
         Route::post('/store', 'ApiController@store')->name('store');
-        Route::get('/retrieve', 'ApiController@retrieve')->name('retrieve');
+        Route::get('/', 'ApiController@index')->name('index');
     });
 });
