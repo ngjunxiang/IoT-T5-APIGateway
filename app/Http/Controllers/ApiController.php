@@ -12,7 +12,7 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function liveImageList()
     {
         try {
             $liveImages = LiveImage::all();
@@ -30,7 +30,7 @@ class ApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function liveImageStore(Request $request)
     {
         try {
             if ($request->imageBlob) {

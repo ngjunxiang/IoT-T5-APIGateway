@@ -12,6 +12,6 @@
  */
 
 Route::prefix('liveimage')->group(function () {
-    Route::post('/store', 'ApiController@store')->name('store');
-    Route::get('/', 'ApiController@index')->name('index');
+    Route::post('/store', 'ApiController@liveImageStore')->name('liveImageStore');
+    Route::get('/', 'ApiController@liveImageList')->name('liveImageList');
 });
