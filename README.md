@@ -1,19 +1,19 @@
 # Getting Started
 ### 1. Get the codebase
 ```sh
-git clone https://github.com/ngjunxiang/IoT-T7.git
+git clone https://github.com/ngjunxiang/IoT-T5.git
 ```
 
 ### 2. Install dependencies
 ```sh
-cd IoT-T7
+cd IoT-T5
 composer install
 ```
 
 ### 3. Environment Variables
 Laravel make use of environment variables to communicate with the database, send emails etc.
 ```sh
-cd IoT-T7
+cd IoT-T5
 cp .env.example .env
 ```
 
