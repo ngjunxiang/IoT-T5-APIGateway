@@ -11,7 +11,7 @@
 |
  */
 
-Route::prefix('liveimage')->group(function () {
+Route::prefix('liveimage')->middleware('whitelist')->group(function () {
     Route::post('/store', 'ApiController@liveImageStore')->name('liveImageStore');
     Route::get('/', 'ApiController@liveImageList')->name('liveImageList');
 });
