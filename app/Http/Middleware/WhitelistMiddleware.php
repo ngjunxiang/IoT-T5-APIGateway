@@ -22,7 +22,8 @@ class WhitelistMiddleware
             $callerIP = $_SERVER['REMOTE_ADDR'];
         }
 
-        if ($callerIP == env('API_HOST')) {
+        // Only allow API calls from the below hosts
+        if (in_array($callerIP, [env('PI_HOST'), env('DASHBOARD_HOST'), '::1', '127.0.0.1'])) {
             return $next($request);
         }
 

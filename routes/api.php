@@ -15,3 +15,7 @@ Route::prefix('liveimage')->middleware('whitelist')->group(function () {
     Route::post('/store', 'ApiController@liveImageStore')->name('liveImageStore');
     Route::get('/', 'ApiController@liveImageList')->name('liveImageList');
 });
+
+Route::prefix('peoplecounter')->middleware('whitelist')->group(function () {
+    Route::get('/', 'ApiController@peopleCounterStore')->name('liveImageStore');
+});

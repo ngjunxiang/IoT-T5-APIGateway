@@ -2,27 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\LiveImage;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function liveImageList()
-    {
-        try {
-            $liveImages = LiveImage::orderBy('id', 'desc')->take(5)->get();
-
-            return response()->json(['success' => true, 'images' => $liveImages]);
-
-        } catch (Exception $e) {
-            return response()->json(['success' => false, 'status' => get_class($e), 'message' => $e->getMessage()]);
-        }
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,11 +18,47 @@ class ApiController extends Controller
     {
         try {
             if ($request->imageBlob) {
-                $liveImage = LiveImage::create(['imageBlob' => $request->imageBlob]);
+                $client = new Client();
+
+                $response = $client->post(env('LIVEIMAGE_HOST') . '/api/liveimage/store', [
+                    'form_params' => [
+                        'imageBlob' => $request->imageBlob,
+                    ],
+                ]);
+
+                if ($response->getStatusCode() === 200) {
+                    $decodedResponse = json_decode($response->getBody()->getContents(), true);
+                    return $decodedResponse;
+                }
             }
-            return response()->json(['success' => true, 'image' => $liveImage]);
         } catch (Exception $e) {
             return response()->json(['success' => false, 'status' => get_class($e), 'message' => $e->getMessage()]);
         }
+
+        return response()->json(['success' => false, 'status' => 400, 'message' => "Invalid parameters"]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function liveImageList()
+    {
+        try {
+            $client = new Client();
+
+            $response = $client->get(env('LIVEIMAGE_HOST') . '/api/liveimage');
+            if ($response->getStatusCode() === 200) {
+                $decodedResponse = json_decode($response->getBody()->getContents(), true);
+                return $decodedResponse;
+            }
+            return $response;
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'status' => get_class($e), 'message' => $e->getMessage()]);
+        }
+
+        return response()->json(['success' => false, 'status' => 400, 'message' => "Invalid parameters"]);
+    }
+
 }
