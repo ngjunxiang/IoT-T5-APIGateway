@@ -23,7 +23,7 @@ class WhitelistMiddleware
         }
 
         // Only allow API calls from the below hosts
-        if (in_array($callerIP, [env('PI_HOST'), env('DASHBOARD_HOST'), '::1', '127.0.0.1'])) {
+        if (in_array($callerIP, [env('DERRICK'), env('PI_HOST'), env('DASHBOARD_HOST')])) {
             return $next($request);
         }
 
