@@ -83,12 +83,60 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function liveImageList()
+    public function index(Request $request)
     {
         try {
+
             $client = new Client();
 
-            $response = $client->get(env('LIVEIMAGE_HOST') . '/api/liveimage');
+            $response = $client->request('GET', env('LIVEIMAGE_HOST') . '/api/liveimage', [
+                'query' => $request->query(),
+            ]);
+
+            if ($response->getStatusCode() === 200) {
+                $decodedResponse = json_decode($response->getBody()->getContents(), true);
+                return $decodedResponse;
+            }
+            return $response;
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'status' => get_class($e), 'message' => $e->getMessage()]);
+        }
+
+        return response()->json(['success' => false, 'status' => 400, 'message' => "Invalid parameters"]);
+    }
+
+    public function average(Request $request)
+    {
+        try {
+
+            $client = new Client();
+
+            $response = $client->request('GET', env('LIVEIMAGE_HOST') . '/api/liveimage/average', [
+                'query' => $request->query(),
+            ]);
+
+            if ($response->getStatusCode() === 200) {
+                $decodedResponse = json_decode($response->getBody()->getContents(), true);
+                return $decodedResponse;
+            }
+            return $response;
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'status' => get_class($e), 'message' => $e->getMessage()]);
+        }
+
+        return response()->json(['success' => false, 'status' => 400, 'message' => "Invalid parameters"]);
+    }
+
+    public function paginate(Request $request)
+    {
+        try {
+
+            $client = new Client();
+
+            $response = $client->request('GET', env('LIVEIMAGE_HOST') . '/api/liveimage/paginate', [
+                'query' => $request->query(),
+            ]);
+
             if ($response->getStatusCode() === 200) {
                 $decodedResponse = json_decode($response->getBody()->getContents(), true);
                 return $decodedResponse;

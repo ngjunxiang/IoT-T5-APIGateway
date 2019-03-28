@@ -24,7 +24,7 @@ class WhitelistMiddleware
 
         // Derrick's Home, Derrick's Office, School's Wifi, Kangrui's Office
         // For Testing, include ::1 (localhost)
-        // $opt_hosts = ['124.197.124.20', '128.106.215.190', '202.161.33.32', '::1'];
+        // $opt_hosts = ['124.197.124.20', '128.106.215.190', '202.161.33.32', '::1', '127.0.0.1'];
         $opt_hosts = ['124.197.124.20', '128.106.215.190', '202.161.33.32', '157.120.248.198'];
         $imt_hosts = [env('PI_HOST'), env('DASHBOARD_HOST')];
 
