@@ -25,7 +25,7 @@ class WhitelistMiddleware
         // Derrick's Home, Derrick's Office, School's Wifi, Kangrui's Office, Kangrui's Home
         // For Testing, include ::1 (localhost)
         // $opt_hosts = ['124.197.124.20', '128.106.215.190', '202.161.33.32', '::1', '127.0.0.1'];
-        $opt_hosts = [env('DERRICK_HOME'), env('DERRICK_OFFICE'), '202.161.33.32', '157.120.248.198', '58.182.111.80'];
+        $opt_hosts = [env('DERRICK_HOME'), env('DERRICK_OFFICE'), '202.161.33.32', '157.120.248.198', '58.182.111.80', '::1', '127.0.0.1'];
         $imt_hosts = [env('PI_HOST'), env('DASHBOARD_HOST'), env('TELEGRAM_HOST')];
 
         // Only allow API calls from the below hosts

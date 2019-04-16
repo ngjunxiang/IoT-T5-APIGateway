@@ -105,6 +105,28 @@ class ApiController extends Controller
         return response()->json(['success' => false, 'status' => 400, 'message' => "Invalid parameters"]);
     }
 
+    public function count(Request $request)
+    {
+        try {
+
+            $client = new Client();
+
+            $response = $client->request('GET', env('LIVEIMAGE_HOST') . '/api/liveimage/count', [
+                'query' => $request->query(),
+            ]);
+
+            if ($response->getStatusCode() === 200) {
+                $decodedResponse = json_decode($response->getBody()->getContents(), true);
+                return $decodedResponse;
+            }
+            return $response;
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'status' => get_class($e), 'message' => $e->getMessage()]);
+        }
+
+        return response()->json(['success' => false, 'status' => 400, 'message' => "Invalid parameters"]);
+    }
+
     public function average(Request $request)
     {
         try {
